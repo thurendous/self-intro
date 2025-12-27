@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, Link } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Header() {
@@ -53,6 +53,7 @@ export default function Header() {
             <Globe size={14} className="ml-2 mr-1 text-brand-muted" />
             {(["en", "ja", "zh"] as const).map((lang) => (
               <button
+                type="button"
                 key={lang}
                 onClick={() => setLanguage(lang)}
                 className={cn(
@@ -66,7 +67,11 @@ export default function Header() {
               </button>
             ))}
           </div>
-          <button className="md:hidden text-brand-primary p-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <button
+            type="button"
+            className="md:hidden text-brand-primary p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -79,11 +84,10 @@ export default function Header() {
           isMobileMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         )}
       >
-        {navLinks.map((link) => (
+        {navLinks.map((link, _) => (
           <a
             key={link.href}
             href={link.href}
-            onClick={() => setIsMobileMenuOpen(false)}
             className="block text-2xl font-bold tracking-tight text-brand-primary hover:text-brand-accent transition-colors"
           >
             {link.name}

@@ -23,13 +23,13 @@ export default function Projects() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {t.projects.list.map((project, i) => (
+          {t.projects.list.map((project, _index) => (
             <motion.div
-              key={i}
+              key={project.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: _index * 0.1 }}
               className="group bg-brand-surface border border-brand-border rounded-3xl p-8 hover:shadow-2xl hover:shadow-brand-accent/5 transition-all duration-500 flex flex-col justify-between"
             >
               <div>
@@ -46,6 +46,8 @@ export default function Projects() {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
+                      role="img"
+                      aria-label="Link Icon"
                       height="20"
                       viewBox="0 0 24 24"
                       fill="none"
@@ -62,9 +64,9 @@ export default function Projects() {
                 <p className="text-brand-muted mb-8 leading-relaxed">{project.desc}</p>
               </div>
               <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag, j) => (
+                {project.tags.map((tag, _) => (
                   <span
-                    key={j}
+                    key={tag}
                     className="px-4 py-1.5 bg-brand-bg text-brand-muted text-xs font-bold rounded-full uppercase tracking-widest"
                   >
                     {tag}
@@ -85,9 +87,11 @@ export default function Projects() {
             className="inline-flex items-center gap-2 px-8 py-4 bg-brand-primary text-white rounded-full font-bold hover:bg-brand-muted transition-all"
           >
             <span>{t.projects.viewMore}</span>
-            <svg
+            <svg 
               xmlns="http://www.w3.org/2000/svg"
               width="20"
+              role="img"
+              aria-label="View More"
               height="20"
               viewBox="0 0 24 24"
               fill="none"
