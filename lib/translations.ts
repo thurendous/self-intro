@@ -18,7 +18,7 @@ export const translations = {
     about: {
       title: "关于我",
       content:
-        "我深耕区块链领域多年，不仅是一名开发者，更是一个持续进化的学习者。我曾深度参与 JPYC v2 等稳定币协议的构建，并为 SPARKN 等多个 Web3 项目提供核心开发与安全审计支持。我享受在东京清晨的代码时光，更享受通过审计复杂的智能合约来探索去中心化生态的安全边界。",
+        "我深耕区块链领域多年，不仅是一名开发者，更是一个持续进化的学习者。我曾深度参与 JPYC v2 等稳定币协议的构建，并为 SPARKN 等多个 Web3 项目提供核心开发与安全审计支持。我享受在东京喝咖啡时不断探索代码的时光，更享受通过审计复杂的智能合约来探索去中心化生态的安全边界。",
       stats: [
         { label: "审计项目", value: "10+" },
         { label: "GitHub Stars", value: "300+" },
@@ -103,7 +103,7 @@ export const translations = {
     about: {
       title: "About Me",
       content:
-        "With years of experience in the blockchain space, I see myself as both a developer and a continuously evolving learner. I have been deeply involved in building protocols like JPYC v2 and providing core development and security auditing for various Web3 projects like SPARKN. Based in Tokyo, I enjoy the boundary-pushing nature of auditing complex smart contracts.",
+        "With years of deep experience in the blockchain field, I am not just a developer, but a continuously evolving learner. I have been deeply involved in building stablecoin protocols like JPYC v2 and providing core development and security auditing support for various Web3 projects including SPARKN. I enjoy exploring code while sipping coffee in Tokyo, and even more so, I relish pushing the security boundaries of decentralized ecosystems through auditing complex smart contracts.",
       stats: [
         { label: "Audits", value: "10+" },
         { label: "GitHub Stars", value: "300+" },
@@ -188,7 +188,7 @@ export const translations = {
     about: {
       title: "自己紹介",
       content:
-        "ブロックチェーン領域で長年の経験を持ち、常に進化し続ける学習者でもあります。JPYC v2などのステーブルコインプロトコルの構築や、SPARKNを含む多くのWeb3プロジェクトのコア開発およびセキュリティ監査に従事してきました。東京を拠点に、複雑なスマートコントラクトの監査を通じて、エコシステムの安全性を追求しています。",
+        "ブロックチェーン領域で長年深く関わってきた私は、単なる開発者ではなく、常に進化し続ける学習者でもあります。JPYC v2などのステーブルコインプロトコルの構築に深く関与し、SPARKNを含む多くのWeb3プロジェクトのコア開発とセキュリティ監査をサポートしてきました。東京でコーヒーを飲みながらコードを探索する時間を楽しみ、さらに、複雑なスマートコントラクトの監査を通じて分散型エコシステムのセキュリティの境界を探求することに喜びを感じています。",
       stats: [
         { label: "監査実績", value: "10+" },
         { label: "GitHub Stars", value: "300+" },
