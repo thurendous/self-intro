@@ -6,12 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const EthereumLogo = ({ className }: { className?: string }) => (
-  <svg 
-    viewBox="0 0 784.37 1277.39" 
-    xmlns="http://www.w3.org/2000/svg" 
-    className={className}
-    fill="currentColor"
-  >
+  <svg viewBox="0 0 784.37 1277.39" xmlns="http://www.w3.org/2000/svg" className={className} fill="currentColor">
     <path d="m392.07 0-3.57 12.16v846.18l3.57 3.55 392.06-231.75z" fill="#343434" fillOpacity=".8" />
     <path d="m392.07 0-392.07 629.98 392.07 231.91v-861.89z" fill="#3c3c3b" fillOpacity=".7" />
     <path d="m392.07 896.33-2.15 2.63v371.13l2.15 7.3 392.3-552.03z" fill="#343434" fillOpacity=".8" />
@@ -37,7 +32,7 @@ export default function Hero() {
             >
               {t.hero.greeting}
             </motion.p>
-            
+
             <div className="overflow-hidden mb-6">
               <motion.h1
                 initial={{ y: "100%" }}
@@ -102,7 +97,7 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
-      
+
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-accent/5 to-transparent"></div>
     </section>

@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "AISC | AI x Web Service Development",
-  description: "Empowering Future with AI Solutions.",
+  title: "Mark Wu | Blockchain Engineer",
+  description: "Blockchain Engineer | Web3 Security Auditor",
 };
 
 export default function RootLayout({
@@ -15,10 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} font-sans`}>{children}</body>
     </html>
   );
 }
-
-

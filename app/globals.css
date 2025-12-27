@@ -20,7 +20,7 @@ body {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 0, 0, 0.05);
   }
-  
+
   .text-gradient {
     background: linear-gradient(to right, #000, #4b5563);
     -webkit-background-clip: text;

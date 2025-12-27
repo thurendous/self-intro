@@ -35,7 +35,10 @@ export default function Contact() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex flex-col sm:flex-row justify-center items-center gap-6"
         >
-          <a href={`mailto:${t.links.email}`} className="group flex items-center gap-4 text-2xl sm:text-5xl font-black transition-all hover:text-brand-accent text-brand-primary">
+          <a
+            href={`mailto:${t.links.email}`}
+            className="group flex items-center gap-4 text-2xl sm:text-5xl font-black transition-all hover:text-brand-accent text-brand-primary"
+          >
             {t.links.email}
             <span className="w-12 h-12 sm:w-20 sm:h-20 border-2 border-brand-primary rounded-full flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-all transform group-hover:rotate-12">
               <ArrowUpRight size={40} className="sm:scale-125" />

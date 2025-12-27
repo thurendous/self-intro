@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
 import { Menu, X, Globe } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function Header() {
   const { language, setLanguage, t } = useLanguage();
@@ -26,16 +27,13 @@ export default function Header() {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-500 border-b ${
-        isScrolled
-          ? "bg-white/80 backdrop-blur-md border-brand-border py-4"
-          : "bg-transparent border-transparent py-6"
-      }`}
+      className={cn(
+        "fixed top-0 w-full z-50 transition-all duration-500 border-b",
+        isScrolled ? "bg-white/80 backdrop-blur-md border-brand-border py-4" : "bg-transparent border-transparent py-6"
+      )}
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex justify-between items-center">
-        <div className="text-xl font-bold tracking-tighter text-brand-primary">
-          {t.nav.brand}
-        </div>
+        <div className="text-xl font-bold tracking-tighter text-brand-primary">{t.nav.brand}</div>
 
         <div className="hidden md:flex items-center space-x-10">
           {navLinks.map((link) => (
@@ -57,20 +55,18 @@ export default function Header() {
               <button
                 key={lang}
                 onClick={() => setLanguage(lang)}
-                className={`px-3 py-1 text-[10px] font-bold rounded-full transition-all duration-300 ${
+                className={cn(
+                  "px-3 py-1 text-[10px] font-bold rounded-full transition-all duration-300",
                   language === lang
                     ? "bg-brand-primary text-white shadow-sm"
                     : "text-brand-muted hover:text-brand-primary"
-                }`}
+                )}
               >
                 {lang.toUpperCase()}
               </button>
             ))}
           </div>
-          <button
-            className="md:hidden text-brand-primary p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
+          <button className="md:hidden text-brand-primary p-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -78,9 +74,10 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-white border-b border-brand-border px-6 py-8 space-y-6 transition-all duration-300 overflow-hidden ${
+        className={cn(
+          "md:hidden bg-white border-b border-brand-border px-6 py-8 space-y-6 transition-all duration-300 overflow-hidden",
           isMobileMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-        }`}
+        )}
       >
         {navLinks.map((link) => (
           <a

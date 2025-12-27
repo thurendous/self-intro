@@ -59,9 +59,7 @@ export default function Projects() {
                     </svg>
                   </a>
                 </div>
-                <p className="text-brand-muted mb-8 leading-relaxed">
-                  {project.desc}
-                </p>
+                <p className="text-brand-muted mb-8 leading-relaxed">{project.desc}</p>
               </div>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag, j) => (
@@ -76,7 +74,7 @@ export default function Projects() {
             </motion.div>
           ))}
         </div>
-        
+
         <div className="mt-20 text-center">
           <motion.a
             href={t.links.github}
@@ -107,4 +105,3 @@ export default function Projects() {
     </section>
   );
 }
-
