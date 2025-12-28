@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
-import { useLanguage } from "@/lib/LanguageContext";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function About() {
   const { t } = useLanguage();

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Footer() {

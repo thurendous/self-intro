@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
-import { useLanguage } from "@/lib/LanguageContext";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Skills() {
   const { t } = useLanguage();
@@ -18,7 +17,7 @@ export default function Skills() {
     },
     {
       title: t.skills.categories.backend,
-      skills: ["Node.js", "Go", "PostgreSQL", "Supabase", "Docker", "GraphQL"],
+      skills: ["Node.js", "Go", "PostgreSQL", "Supabase", "Docker", "Restfull API"],
     },
     {
       title: t.skills.categories.tools,

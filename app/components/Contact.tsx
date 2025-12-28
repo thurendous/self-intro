@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
-import { useLanguage } from "@/lib/LanguageContext";
-import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Contact() {
   const { t } = useLanguage();

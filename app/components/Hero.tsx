@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
-import { useLanguage } from "@/lib/LanguageContext";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const EthereumLogo = ({ className }: { className?: string }) => (
   <svg
