@@ -10,8 +10,8 @@ export const translations = {
     hero: {
       greeting: "👋 你好，我是",
       name: "Mark Wu",
-      title: "区块链工程师 / Web3 安全审计师",
-      desc: "一名坚定的长期主义者，长期投注于 Web3 行业并深信其无限潜力。我是终身学习的践行者，热衷于不断走出舒适区，迎接新的挑战。专注于构建安全、透明的去中心化未来。",
+      title: "区块链工程师",
+      desc: "一名坚信 Web3 行业长期发展潜力的工程师，以长期主义视角持续挑战自我。我是终身学习的践行者，热衷于走出舒适区，迎接新的挑战。专注于构建安全、透明的去中心化未来，同时持续关注 AI 等前沿技术并付诸行动。日常使用中日英三种语言工作。",
       location: "📍 现居：日本 · 东京",
       cta: "联系我",
     },
@@ -95,10 +95,10 @@ export const translations = {
     hero: {
       greeting: "👋 Hi, I'm",
       name: "Mark Wu",
-      title: "Blockchain Engineer / Web3 Security Auditor",
-      desc: "A dedicated long-termist fully committed to the Web3 industry and its long-term potential. I'm a lifelong learner who thrives on stepping out of my comfort zone to embrace new challenges. Focused on building a secure and transparent decentralized future.",
+      title: "Blockchain Engineer",
+      desc: "An engineer who believes in the long-term potential of the Web3 industry and continues to challenge myself with a long-term perspective. Lifelong learning is my motto—I enjoy stepping out of my comfort zone and embracing new challenges. Dedicated to building a secure and transparent decentralized future while staying at the forefront of emerging technologies like AI. Fluent in Chinese, Japanese, and English.",
       location: "📍 Based in: Tokyo, Japan",
-      cta: "Let's Web3",
+      cta: "Contact Me",
     },
     about: {
       title: "About Me",
@@ -180,10 +180,10 @@ export const translations = {
     hero: {
       greeting: "👋 こんにちは、",
       name: "Mark Wu",
-      title: "ブロックチェーンエンジニア / Web3 セキュリティ監査",
-      desc: "Web3業界の長期的な発展を信じ、自らも長期的な視点で挑戦し続けるエンジニアです。終身学習を信条とし、常にコンフォートゾーンを抜け出し、新しい課題に立ち向かうことを楽しんでいます。安全で透明性の高い分散型の未来を構築することに専念しています。",
+      title: "ブロックチェーンエンジニア",
+      desc: "Web3業界の長期的な発展を信じ、自らも長期的な視点で挑戦し続けるエンジニアです。生涯学習を信条とし、常にコンフォートゾーンを抜け出し、新しいチャレンジをすることを楽しんでいます。安全で透明性の高い分散型社会の未来を構築することに専念しています。AIなどのテックの最前線を常に観察しつつ行動しています。日中英の3ヶ国語で活動しています。",
       location: "📍 拠点：東京、日本",
-      cta: "Web3を語る",
+      cta: "コンタクトを取る",
     },
     about: {
       title: "自己紹介",
