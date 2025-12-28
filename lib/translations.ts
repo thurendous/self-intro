@@ -106,7 +106,7 @@ export const translations = {
       greeting: "👋 Hi, I'm",
       name: "Mark Wu",
       title: "Blockchain Engineer",
-      desc: "An engineer who believes in the long-term potential of the Web3 industry and continues to challenge myself with a long-term perspective. Lifelong learning is my motto—I enjoy stepping out of my comfort zone and embracing new challenges. Dedicated to building a secure and transparent decentralized future while staying at the forefront of emerging technologies like AI. Fluent in Chinese, Japanese, and English.",
+      desc: "An engineer who believes in the long-term potential of the Web3 industry and continues to challenge myself with a long-term perspective. Lifelong learning is my motto. I enjoy stepping out of my comfort zone and embracing new challenges. Dedicated to building a secure and transparent decentralized future while staying at the forefront of emerging technologies like AI. Fluent in Chinese, Japanese, and English.",
       location: "📍 Based in: Tokyo, Japan",
       cta: "Contact Me",
     },
