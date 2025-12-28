@@ -35,7 +35,7 @@ export default function Hero() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-brand-accent font-bold tracking-widest uppercase text-xs mb-4"
+              className="text-brand-accent font-bold tracking-widest uppercase text-xl mb-4"
             >
               {t.hero.greeting}
             </motion.p>
