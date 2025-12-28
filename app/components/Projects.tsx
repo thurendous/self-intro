@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { useLanguage } from "@/lib/LanguageContext";
 import { motion } from "framer-motion";
 
@@ -37,12 +36,13 @@ export default function Projects() {
                   <h3 className="text-2xl font-bold tracking-tight group-hover:text-brand-accent transition-colors">
                     {project.title}
                   </h3>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 bg-brand-bg rounded-full hover:bg-brand-accent hover:text-white transition-all duration-300"
-                  >
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 bg-brand-bg rounded-full hover:bg-brand-accent hover:text-white transition-all duration-300"
+                    >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
@@ -60,6 +60,7 @@ export default function Projects() {
                       <path d="M7 17 17 7" />
                     </svg>
                   </a>
+                  )}
                 </div>
                 <p className="text-brand-muted mb-8 leading-relaxed">{project.desc}</p>
               </div>

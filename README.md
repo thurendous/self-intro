@@ -4,7 +4,7 @@
 
 ## 预览
 
-🌐 [在线访问](https://markwu.github.io/self-intro/)
+🌐 [在线访问](https://thurendous.github.io/self-intro/)
 
 ## 技术栈
 
