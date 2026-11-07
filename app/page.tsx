@@ -3,24 +3,26 @@
 import { LanguageProvider } from "@/lib/LanguageContext";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Experience from "./components/Experience";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import Projects from "./components/Projects";
+import Products from "./components/Products";
 import Skills from "./components/Skills";
 
 export default function Home() {
   return (
     <LanguageProvider>
-      <main className="min-h-screen">
-        <Header />
+      <Header />
+      <main id="main" tabIndex={-1}>
         <Hero />
+        <Products />
         <About />
+        <Experience />
         <Skills />
-        <Projects />
         <Contact />
-        <Footer />
       </main>
+      <Footer />
     </LanguageProvider>
   );
 }

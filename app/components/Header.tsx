@@ -1,99 +1,77 @@
 "use client";
 
-import { Globe, Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
-import { cn } from "@/lib/utils";
+import { sectionIds } from "@/lib/siteData";
+import { languages } from "@/lib/translations";
 
 export default function Header() {
-  const { language, setLanguage, t } = useLanguage();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t, language, setLanguage } = useLanguage();
+  const [open, setOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const navLinks = [
-    { name: t.nav.about, href: "#about" },
-    { name: t.nav.skills, href: "#skills" },
-    { name: t.nav.projects, href: "#projects" },
-    { name: t.nav.contact, href: "#contact" },
-  ];
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
-    <nav
-      className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-500 border-b",
-        isScrolled ? "bg-white/80 backdrop-blur-md border-brand-border py-4" : "bg-transparent border-transparent py-6"
-      )}
-    >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex justify-between items-center">
-        <div className="text-xl font-bold tracking-tighter text-brand-primary">{t.nav.brand}</div>
+    <header className="site-header">
+      <a className="skip-link" href="#main">
+        {t.ui.skip}
+      </a>
+      <div className="header-bar">
+        <a className="brand" href="#top">
+          Mark Wu
+        </a>
 
-        <div className="hidden md:flex items-center space-x-10">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-xs font-bold uppercase tracking-widest text-brand-muted hover:text-brand-primary transition-colors relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-brand-primary transition-all group-hover:w-full"></span>
-            </a>
-          ))}
-        </div>
-
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center bg-brand-bg border border-brand-border rounded-full p-1">
-            <Globe size={14} className="ml-2 mr-1 text-brand-muted" />
-            {(["en", "ja", "zh"] as const).map((lang) => (
+        <fieldset className="lang-fieldset">
+          <legend className="sr-only">{t.ui.language}</legend>
+          <div className="lang-switch">
+            {languages.map(({ code, label }) => (
               <button
+                key={code}
                 type="button"
-                key={lang}
-                onClick={() => setLanguage(lang)}
-                className={cn(
-                  "px-3 py-1 text-[10px] font-bold rounded-full transition-all duration-300",
-                  language === lang
-                    ? "bg-brand-primary text-white shadow-sm"
-                    : "text-brand-muted hover:text-brand-primary"
-                )}
+                lang={code}
+                aria-pressed={language === code}
+                onClick={() => setLanguage(code)}
               >
-                {lang.toUpperCase()}
+                {label}
               </button>
             ))}
           </div>
-          <button
-            type="button"
-            className="md:hidden text-brand-primary p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
+        </fieldset>
 
-      {/* Mobile Menu */}
-      <div
-        className={cn(
-          "md:hidden bg-white border-b border-brand-border px-6 py-8 space-y-6 transition-all duration-300 overflow-hidden",
-          isMobileMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-        )}
-      >
-        {navLinks.map((link, _) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className="block text-2xl font-bold tracking-tight text-brand-primary hover:text-brand-accent transition-colors"
-          >
-            {link.name}
-          </a>
-        ))}
+        <button
+          ref={toggleRef}
+          type="button"
+          className="menu-toggle"
+          aria-expanded={open}
+          aria-controls="site-nav"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? t.ui.menuClose : t.ui.menuOpen}
+        </button>
+
+        <nav id="site-nav" className="site-nav" aria-label={t.ui.mainNav} data-open={open}>
+          <ul>
+            {sectionIds.map((id) => (
+              <li key={id}>
+                <a href={`#${id}`} onClick={() => setOpen(false)}>
+                  {t.nav[id]}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 }

@@ -1,36 +1,53 @@
 "use client";
 
 import type React from "react";
-import { createContext, useContext, useState, useEffect } from "react";
-import { translations, type Language } from "@/lib/translations";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { defaultLanguage, isLanguage, type Language, type Translation, translations } from "@/lib/translations";
 
 type LanguageContextType = {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: typeof translations.zh;
+  t: Translation;
 };
 
+const STORAGE_KEY = "language";
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+function applyDocumentLanguage(lang: Language) {
+  document.documentElement.lang = lang;
+  document.title = translations[lang].meta.title;
+  document.querySelector('meta[name="description"]')?.setAttribute("content", translations[lang].meta.description);
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLang] = useState<Language>("en");
+  const [language, setLang] = useState<Language>(defaultLanguage);
 
   useEffect(() => {
-    const saved = localStorage.getItem("language") as Language;
-    if (saved && (saved === "zh" || saved === "en" || saved === "ja")) {
+    let saved: string | null = null;
+    try {
+      saved = localStorage.getItem(STORAGE_KEY);
+    } catch {
+      saved = null;
+    }
+    if (isLanguage(saved) && saved !== defaultLanguage) {
       setLang(saved);
+      applyDocumentLanguage(saved);
     }
   }, []);
 
-  const setLanguage = (lang: Language) => {
+  const setLanguage = useCallback((lang: Language) => {
     setLang(lang);
-    localStorage.setItem("language", lang);
-    document.documentElement.lang = lang;
-  };
+    applyDocumentLanguage(lang);
+    try {
+      localStorage.setItem(STORAGE_KEY, lang);
+    } catch {
+      // Storage can be blocked; the choice then lasts for this visit only.
+    }
+  }, []);
 
-  const t = translations[language];
+  const value = useMemo(() => ({ language, setLanguage, t: translations[language] }), [language, setLanguage]);
 
-  return <LanguageContext.Provider value={{ language, setLanguage, t }}>{children}</LanguageContext.Provider>;
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 
 export function useLanguage() {
