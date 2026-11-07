@@ -63,7 +63,7 @@ describe("base path", () => {
 });
 
 describe("canonical metadata", () => {
-  it("is absent by default so nothing claims markwu.xyz early", () => {
+  it("is absent in the local default so development never claims markwu.xyz", () => {
     const cfg = resolveSiteConfig({});
     expect(cfg.siteUrl).toBeUndefined();
     expect(cfg.canonicalUrl).toBeUndefined();
@@ -122,8 +122,44 @@ describe("canonical metadata", () => {
   });
 });
 
+describe("production domain", () => {
+  const wf = readFileSync(".github/workflows/deploy.yml", "utf8");
+  const buildStep = wf.match(/- name: Build\n[\s\S]*?(?=\n\s*- name:)/)?.[0] ?? "";
+
+  it("the workflow build step sets the root base path and the markwu.xyz origin", () => {
+    expect(buildStep).toMatch(/run: npm run build\n/);
+    expect(buildStep).toMatch(/SITE_BASE_PATH: \/\n/);
+    expect(buildStep).toMatch(/SITE_URL: https:\/\/markwu\.xyz\s*$/);
+  });
+
+  it("resolves the workflow env to a root canonical at https://markwu.xyz/", () => {
+    const cfg = resolveSiteConfig({ SITE_BASE_PATH: "/", SITE_URL: "https://markwu.xyz" });
+    expect(cfg).toEqual({ basePath: "", siteUrl: "https://markwu.xyz", canonicalUrl: "https://markwu.xyz/" });
+  });
+
+  it("keeps the local default on /self-intro with no canonical", () => {
+    expect(resolveSiteConfig({})).toEqual({
+      basePath: "/self-intro",
+      siteUrl: undefined,
+      canonicalUrl: undefined,
+    });
+  });
+
+  it("pins Node 24 (Node 20 is end of life) and never uses www", () => {
+    expect(wf).toMatch(/node-version: "24"/);
+    expect(wf).not.toMatch(/node-version: "20"/);
+    expect(wf).not.toMatch(/www\./);
+  });
+
+  it("preserves triggers, permissions and concurrency", () => {
+    expect(wf).toMatch(/on:\n {2}push:\n {4}branches:\n {6}- main[^\n]*\n {2}workflow_dispatch:\n/);
+    expect(wf).toMatch(/permissions:\n {2}contents: read\n {2}pages: write\n {2}id-token: write\n/);
+    expect(wf).toMatch(/concurrency:\n {2}group: "pages"\n {2}cancel-in-progress: false\n/);
+  });
+});
+
 describe("deployment safety", () => {
-  it("ships no CNAME and keeps the workflow trigger set to main push and manual dispatch", () => {
+  it("needs no CNAME file because Actions deployments ignore it, and has no PR trigger", () => {
     expect(existsSync("CNAME")).toBe(false);
     expect(existsSync("public/CNAME")).toBe(false);
     const wf = readFileSync(".github/workflows/deploy.yml", "utf8");

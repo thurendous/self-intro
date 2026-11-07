@@ -8,7 +8,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // The default lives in lib/site.mjs. Set SITE_BASE_PATH=/ only for a coordinated root migration (see README).
+  // The default lives in lib/site.mjs. Production sets SITE_BASE_PATH=/ in the deploy workflow (see README).
   ...(basePath ? { basePath } : {}),
 };
 
