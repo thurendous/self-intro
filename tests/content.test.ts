@@ -104,7 +104,7 @@ describe("product links", () => {
 
 describe("contact privacy", () => {
   it("offers only the verified GitHub and X URLs", () => {
-    expect(contactLinks.map((c) => c.url)).toEqual(["https://github.com/thurendous", "https://x.com/Markwu_crypto"]);
+    expect(contactLinks.map((c) => c.url)).toEqual(["https://github.com/thurendous", "https://x.com/0xzzwu"]);
   });
 
   it("contains no email address or mailto anywhere in tracked source and docs", () => {
