@@ -9,9 +9,11 @@
 
 ### 步骤 1: 确认 basePath
 
-默认 `basePath` 为 `/self-intro`，对应 `https://<用户名>.github.io/self-intro/`，workflow 无需任何环境变量。
+生产环境部署到自定义域名 `https://markwu.xyz`。workflow 的 Build 步骤设置 `SITE_BASE_PATH=/` 和 `SITE_URL=https://markwu.xyz`，因此 canonical 和 `og:url` 为 `https://markwu.xyz/`，资源与 favicon 从根路径加载。本地开发默认仍是 `/self-intro`，且不输出 canonical。
 
-`basePath` 由环境变量 `SITE_BASE_PATH` 控制（见 `lib/site.mjs`），不要再手动修改 `next.config.mjs`。切换到根路径属于需要协调的迁移，步骤见 `README.md` 的 “Future root migration”，在迁移完成前不要改动 workflow 或默认值。
+`basePath` 由环境变量 `SITE_BASE_PATH` 控制（见 `lib/site.mjs`），不要手动修改 `next.config.mjs`。
+
+自定义域名在 **Settings > Pages > Custom domain** 中设置为 `markwu.xyz`，该设置保存在 GitHub，不在仓库里。通过 GitHub Actions 发布时，`CNAME` 文件会被忽略且不是必需的，所以仓库不包含它。DNS 记录在域名服务商处按 GitHub Pages 文档添加，代码中不含任何 DNS 设置。本次不配置 `www`。详细步骤见 `README.md` 的 “Production domain”。
 
 ### 步骤 2: 推送代码到 GitHub
 
@@ -62,15 +64,13 @@ git push -u origin main
 
 ## 🔍 验证部署
 
-访问你的网站：
-- 如果仓库名是 `<username>.github.io`：`https://<username>.github.io/`
-- 如果仓库名是其他名字：`https://<username>.github.io/<仓库名>/`
+访问 https://markwu.xyz/。
 
 ## ⚠️ 常见问题
 
 ### 1. 404 错误
 - **原因**：`basePath` 配置不正确
-- **解决**：检查构建时的 `SITE_BASE_PATH`（默认 `/self-intro`）是否与实际访问路径匹配
+- **解决**：检查构建时的 `SITE_BASE_PATH` 是否与实际访问路径匹配（生产为 `/`，本地默认 `/self-intro`）
 
 ### 2. 样式或资源加载失败
 - **原因**：路径问题

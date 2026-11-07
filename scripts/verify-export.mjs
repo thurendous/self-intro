@@ -1,10 +1,11 @@
-// Usage: node scripts/verify-export.mjs <exportDir> <expectedBasePath|root>
+// Usage: node scripts/verify-export.mjs <exportDir> <expectedBasePath|root> [siteUrl]
+// With siteUrl, also asserts the canonical, og:url and favicon for that origin. Without it, asserts none is emitted.
 // Scans a static export for public email addresses and checks root-relative asset URLs.
 // Prints sanitized pass/fail lines only. Matches are never echoed.
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
-const [dir, base] = process.argv.slice(2);
+const [dir, base, siteUrl] = process.argv.slice(2);
 if (!dir || !base) {
   console.error("usage: verify-export.mjs <exportDir> <basePath|root>");
   process.exit(2);
@@ -27,6 +28,7 @@ let emailHits = 0;
 let badUrls = 0;
 let htmlFiles = 0;
 let hasCname = false;
+let indexHtml = "";
 
 for (const file of files) {
   if (file.endsWith("CNAME")) hasCname = true;
@@ -35,6 +37,7 @@ for (const file of files) {
   if (EMAIL.test(text) || MAILTO.test(text)) emailHits++;
   if (file.endsWith(".html")) {
     htmlFiles++;
+    if (file === join(dir, "index.html")) indexHtml = text;
     for (const m of text.matchAll(/\b(?:href|src)="(\/[^"/][^"]*|\/)"/g)) {
       const url = m[1];
       const ok = basePath === "" ? true : url === basePath || url.startsWith(`${basePath}/`);
@@ -46,7 +49,16 @@ for (const file of files) {
   }
 }
 
+const expectedUrl = siteUrl ? `${siteUrl.replace(/\/+$/, "")}${basePath}/` : undefined;
+const canonical = indexHtml.match(/<link[^>]*rel="canonical"[^>]*href="([^"]*)"/)?.[1];
+const ogUrl = indexHtml.match(/<meta[^>]*property="og:url"[^>]*content="([^"]*)"/)?.[1];
+const icon = indexHtml.match(/<link[^>]*rel="icon"[^>]*href="([^"?]*)/)?.[1] ?? "";
+
 const checks = [
+  ["index.html found", indexHtml !== ""],
+  [`canonical ${expectedUrl ?? "absent"}`, canonical === expectedUrl],
+  [`og:url ${expectedUrl ?? "absent"}`, ogUrl === expectedUrl],
+  [`favicon under base path "${basePath || "/"}"`, icon.startsWith(`${basePath}/`)],
   ["export has html", htmlFiles > 0],
   ["no email or mailto in export", emailHits === 0],
   [`root-relative URLs match base path "${basePath || "/"}"`, badUrls === 0],
