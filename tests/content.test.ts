@@ -63,6 +63,17 @@ describe("translations", () => {
     expect(translations.zh.hero.intro).not.toMatch(/[぀-ヿ]/);
   });
 
+  it("hero intro keeps the approved wording and real-world business in every language", () => {
+    expect(translations.zh.hero.intro).toBe(
+      "我编写并审计智能合约，也自己开发小型 Web 产品。我做现实世界的真实的生意。我的工作语言是中文、日语和英语。"
+    );
+    expect(translations.en.hero.intro).toContain("run a business in the real world");
+    expect(translations.ja.hero.intro).toContain("現実の世界でもビジネスを営んでいます");
+    for (const lang of langs) {
+      expect(translations[lang].hero.intro).not.toMatch(/@|mailto/i);
+    }
+  });
+
   it("use the Mark Wu brand and drop the old brand, counters and availability claims", () => {
     for (const lang of langs) {
       const all = strings(translations[lang]).join("\n");

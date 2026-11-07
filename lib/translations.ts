@@ -23,7 +23,7 @@ const en = {
     name: "Mark Wu",
     role: "Blockchain engineer in Tokyo",
     intro:
-      "I write and audit smart contracts, and I build small web products of my own. I work in Chinese, Japanese and English.",
+      "I write and audit smart contracts, and I build small web products of my own. I also run a business in the real world. My working languages are Chinese, Japanese and English.",
     ctaProducts: "See my products",
     ctaContact: "Find me online",
   },
@@ -132,7 +132,7 @@ const ja: Translation = {
     name: "Mark Wu",
     role: "東京のブロックチェーンエンジニア",
     intro:
-      "スマートコントラクトの開発と監査に取り組み、自分でも小さなWebプロダクトを作っています。日本語・中国語・英語で仕事をしています。",
+      "スマートコントラクトの開発と監査に取り組み、自分でも小さなWebプロダクトを作っています。現実の世界でもビジネスを営んでいます。仕事では中国語・日本語・英語を使っています。",
     ctaProducts: "プロダクトを見る",
     ctaContact: "ネット上の連絡先",
   },
@@ -237,7 +237,7 @@ const zh: Translation = {
   hero: {
     name: "Mark Wu",
     role: "东京的区块链工程师",
-    intro: "我编写并审计智能合约，也自己开发小型 Web 产品。工作语言是中文、日语和英语。",
+    intro: "我编写并审计智能合约，也自己开发小型 Web 产品。我做现实世界的真实的生意。我的工作语言是中文、日语和英语。",
     ctaProducts: "查看我的产品",
     ctaContact: "在网上找到我",
   },
