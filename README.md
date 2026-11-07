@@ -1,104 +1,81 @@
-# Mark.dev - Personal Portfolio
+# Mark Wu: personal introduction and portfolio hub
 
-一个现代化的个人作品集网站，使用 Next.js 14 构建，支持多语言（中文/英文/日文）。
+A static Next.js (App Router, `output: "export"`) site in English, Japanese and Chinese. It introduces Mark Wu, links the two current products, and keeps earlier project work as experience.
 
-## 预览
+- Tickspace: https://tickspace.markwu.xyz
+- JPYC Watcher: https://jpyc-watcher.markwu.xyz
 
-🌐 [在线访问](https://thurendous.github.io/self-intro/)
+Public contact is GitHub (https://github.com/thurendous) and X (https://x.com/Markwu_crypto) only. There is no public email, mailto link, contact form or contact service, and tests enforce that.
 
-## 技术栈
-
-- **框架**: Next.js 14
-- **语言**: TypeScript
-- **样式**: Tailwind CSS
-- **动画**: Framer Motion
-- **图标**: Lucide React
-- **代码质量**: Biome (格式化 + Lint)
-
-## 快速开始
-
-### 安装依赖
+## Develop
 
 ```bash
-npm install
+npm ci            # or npm install
+npm run dev       # http://localhost:3000/self-intro/
 ```
 
-### 本地开发
+Fonts are system stacks, so install is the only step that needs the network.
+
+## Build and preview
 
 ```bash
-npm run dev
+npm run build                      # default base path /self-intro, output in ./out
 ```
 
-访问 [http://localhost:3000](http://localhost:3000) 查看网站。
+`next start` does not work with `output: "export"`, so there is no `start` script. Preview the static export instead. It expects to live under `/self-intro/`. Copy `out` to `/tmp/preview/self-intro`, then serve `/tmp/preview` with any static server (for example `python3 -m http.server 3000 -d /tmp/preview`) and open `http://localhost:3000/self-intro/`.
 
-### 构建
+Root-mode build, for checking only:
 
 ```bash
+npm run build:root                 # same as SITE_BASE_PATH=/ next build
+```
+
+Rebuild with `npm run build` afterwards so `./out` holds the default export.
+
+## Configuration
+
+| Variable | Default | Meaning |
+| --- | --- | --- |
+| `SITE_BASE_PATH` | `/self-intro` | `/` or `root` builds for a root domain. Any other value must be a plain path. |
+| `SITE_URL` | unset | An https origin with no path. When set, the canonical and Open Graph URL become `SITE_URL + base path + /`. When unset, no canonical or `og:url` is emitted. |
+
+Logic lives in `lib/site.mjs` and is unit tested. The string `/self-intro` appears in source only as the `DEFAULT_BASE_PATH` constant there; a test checks that `app/` and the other `lib/` files do not repeat it. Invalid values for either variable fail the build with a clear error instead of being guessed at. The favicon is `app/icon.png`, which Next prefixes with the base path automatically.
+
+## Tests and checks
+
+```bash
+npm test               # vitest: translations, product links, contact privacy, base path, structure
+npm run typecheck
+npm run lint           # biome check: lint, format and import order, non-interactive
+npm run check          # same as lint
 npm run build
+npm run verify:export -- out /self-intro     # or: -- out root
 ```
 
-## 可用脚本
+`verify:export` scans a static export for email addresses and mailto links, checks that root-relative URLs match the base path, and checks that no CNAME is shipped. It prints pass or fail only.
 
-| 命令 | 说明 |
-|------|------|
-| `npm run dev` | 启动开发服务器 |
-| `npm run build` | 构建生产版本 |
-| `npm run start` | 启动生产服务器 |
-| `npm run lint` | 运行 ESLint |
-| `npm run format` | 使用 Biome 格式化代码 |
-| `npm run check` | 运行 Biome 检查 |
-| `npm run check:fix` | 运行 Biome 检查并自动修复 |
+What the automated tests cover: translation shape and non-empty strings across EN, JA and ZH, product URLs, contact link allowlist, absence of email in source and docs, base path and canonical logic, absence of a CNAME and of PR triggers in the workflow, and structural accessibility contracts on server-rendered markup (skip link, landmarks, one h1, labelled sections, ARIA state, safe external links, content present without animation).
 
-## 项目结构
+What they do not cover: layout, contrast, focus rings, responsive behaviour, motion and the open menu. Those need a manual browser pass.
 
-```
-├── app/
-│   ├── components/     # React 组件
-│   │   ├── Header.tsx
-│   │   ├── Hero.tsx
-│   │   ├── About.tsx
-│   │   ├── Skills.tsx
-│   │   ├── Projects.tsx
-│   │   ├── Contact.tsx
-│   │   └── Footer.tsx
-│   ├── globals.css     # 全局样式
-│   ├── layout.tsx      # 根布局
-│   └── page.tsx        # 首页
-├── lib/
-│   ├── LanguageContext.tsx  # 多语言上下文
-│   ├── translations.ts      # 翻译文件
-│   └── utils.ts             # 工具函数
-├── public/             # 静态资源
-└── .github/
-    └── workflows/
-        └── deploy.yml  # GitHub Pages 部署配置
-```
+## Design
 
-## 部署
+See [docs/design.md](docs/design.md) for the direction, tokens, and critique.
 
-本项目配置为部署到 GitHub Pages。详细部署步骤请参考 [DEPLOY.md](./DEPLOY.md)。
+## Deployment
 
-### 快速部署
+`.github/workflows/deploy.yml` deploys on push to `main` and on manual dispatch. It has no pull request trigger and was not changed. It runs `npm run build` with no variables, so it produces the default `/self-intro` build.
 
-1. Fork 或克隆此仓库
-2. 修改 `next.config.mjs` 中的 `basePath`（如需要）
-3. 推送到 GitHub
-4. 在仓库 Settings > Pages 中选择 "GitHub Actions" 作为源
-5. 代码推送到 `main` 分支时会自动部署
+## Future root migration
 
-## 自定义
+Do not do this piecemeal. Coordinate it as one change and stop at the gate below.
 
-### 修改个人信息
+1. Stop gate. Confirm what currently serves `markwu.xyz` and its DNS. If any record or site already uses the apex or `www` for something else, stop and resolve it first. Never touch MX or TXT records, never add wildcard records, and never change the Tickspace or JPYC Watcher products or their subdomains.
+2. Base path and assets. Build with `SITE_BASE_PATH=/` and run `npm run verify:export -- out root`. Check the favicon and every asset resolve from `/`.
+3. Pages and CNAME. In the same change, set the custom domain in the repository Pages settings and add a `CNAME` file (for example `public/CNAME`) containing the chosen host. Update the workflow environment so the build uses `SITE_BASE_PATH=/`.
+4. DNS. Add only the records GitHub Pages requires for the chosen host (apex A/AAAA or a `www` CNAME).
+5. Canonical and Open Graph. Set `SITE_URL` to the final https origin only after DNS resolves. This is what turns on canonical and `og:url`.
+6. HTTPS. Wait for GitHub to issue the certificate, then enable Enforce HTTPS.
+7. Verify the root URL, then decide how `/self-intro/` should redirect.
 
-编辑 `lib/translations.ts` 文件，更新你的个人信息、项目经历等。
-
-### 修改样式
-
-- 全局样式：`app/globals.css`
-- Tailwind 配置：`tailwind.config.ts`
-- 组件样式：各组件文件中的 Tailwind 类名
-
-## License
-
-MIT
-
+Until all of that is done, the repository must keep the default base path, no CNAME, and no canonical.

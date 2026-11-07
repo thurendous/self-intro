@@ -7,24 +7,11 @@
 
 ## 🚀 部署步骤
 
-### 步骤 1: 确认仓库名称和 basePath 配置
+### 步骤 1: 确认 basePath
 
-**重要**：根据你的 GitHub 仓库名称，需要调整 `next.config.mjs` 中的 `basePath`：
+默认 `basePath` 为 `/self-intro`，对应 `https://<用户名>.github.io/self-intro/`，workflow 无需任何环境变量。
 
-#### 情况 A：仓库名为 `<你的用户名>.github.io`
-- **示例**：如果你的 GitHub 用户名是 `markwu`，仓库名是 `markwu.github.io`
-- **操作**：在 `next.config.mjs` 中**注释掉** `basePath` 这一行：
-  ```javascript
-  // basePath: '/self-intro',
-  ```
-- **访问地址**：`https://markwu.github.io/`
-
-#### 情况 B：仓库名为其他名字（如 `self-intro`）
-- **操作**：在 `next.config.mjs` 中**保持** `basePath` 设置：
-  ```javascript
-  basePath: '/self-intro',
-  ```
-- **访问地址**：`https://<你的用户名>.github.io/self-intro/`
+`basePath` 由环境变量 `SITE_BASE_PATH` 控制（见 `lib/site.mjs`），不要再手动修改 `next.config.mjs`。切换到根路径属于需要协调的迁移，步骤见 `README.md` 的 “Future root migration”，在迁移完成前不要改动 workflow 或默认值。
 
 ### 步骤 2: 推送代码到 GitHub
 
@@ -83,7 +70,7 @@ git push -u origin main
 
 ### 1. 404 错误
 - **原因**：`basePath` 配置不正确
-- **解决**：检查 `next.config.mjs` 中的 `basePath` 是否与仓库名匹配
+- **解决**：检查构建时的 `SITE_BASE_PATH`（默认 `/self-intro`）是否与实际访问路径匹配
 
 ### 2. 样式或资源加载失败
 - **原因**：路径问题
