@@ -58,6 +58,16 @@ What the automated tests cover: translation shape and non-empty strings across E
 
 What they do not cover: layout, contrast, focus rings, responsive behaviour, motion and the open menu. Those need a manual browser pass.
 
+## Dependency migration and supported Node
+
+Next.js 14.2.35 to 16.4.5 and Vitest 2.1.9 to 4.1.12 cleared every `npm audit` finding, including `--omit=dev`, as of a 2026-11-07 snapshot. That is not a guarantee for the future. New advisories can appear at any time, so rerun `npm audit`. Next 16.4.5 is the current stable release outside the vulnerable range (the 14.x and 15.x lines are all inside it). Versions were chosen from the npm registry, not `--force`.
+
+- **Node.** Recommended: Node 24, which is the version tested locally for this migration. The engine-compatible floors are Node 20.19 or newer, or 22.12 or newer. Next 16 needs 20.9 or newer. Vitest 4 pulls in Vite 8, which needs 20.19 or newer. These floors come from package `engines` fields and say nothing about maintenance status. CI pins `node-version: "20"`, which resolves to the latest 20.x. That is engine-compatible, but this README does not claim Node 20 is currently supported or LTS. The workflow is unchanged by scope.
+- **React.** Stays on 18. Next 16 accepts `^18.2.0 || ^19`.
+- **Next.** Next rewrote `tsconfig.json` on first build (`jsx: react-jsx`, extra `.next/dev/types` include). No source changes were needed. The export is still static with the same base path behavior.
+- **Vitest.** Vite 8 replaced esbuild with oxc, so `vitest.config.ts` became `vitest.config.mts` and `esbuild: { jsx }` became `oxc: { jsx: { runtime: "automatic" } }`.
+- **Vitest 5 not used.** It needs Node 22.12 or newer, which would force a CI Node bump for no audit benefit.
+
 ## Design
 
 See [docs/design.md](docs/design.md) for the direction, tokens, and critique.
