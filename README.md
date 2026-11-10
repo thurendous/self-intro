@@ -5,7 +5,7 @@ A static Next.js (App Router, `output: "export"`) site in English, Japanese and 
 - Tickspace: https://tickspace.markwu.xyz
 - JPYC Watcher: https://jpyc-watcher.markwu.xyz
 
-Public contact is GitHub (https://github.com/thurendous) and X (https://x.com/0xzzwu) only. There is no public email, mailto link, contact form or contact service, and tests enforce that.
+Public contact is GitHub (https://github.com/thurendous) and X (https://x.com/Markwu_crypto) only. There is no public email, mailto link, contact form or contact service, and tests enforce that.
 
 ## Develop
 
