@@ -1,6 +1,6 @@
 export const contactLinks = [
   { id: "github", url: "https://github.com/thurendous" },
-  { id: "x", url: "https://x.com/0xzzwu" },
+  { id: "x", url: "https://x.com/Markwu_crypto" },
 ] as const;
 
 export const products = [
