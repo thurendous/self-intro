@@ -6,6 +6,7 @@ export const contactLinks = [
 export const products = [
   { id: "tickspace", url: "https://tickspace.markwu.xyz" },
   { id: "jpycWatcher", url: "https://jpyc-watcher.markwu.xyz" },
+  { id: "recom", url: "https://recordmoney.markwu.xyz" },
 ] as const;
 
 export const sectionIds = ["products", "about", "experience", "skills", "contact"] as const;
@@ -35,6 +36,6 @@ export const experience = [
 export const skillGroups = [
   { id: "blockchain", skills: ["Solidity", "EVM", "Foundry", "Hardhat", "OpenZeppelin", "Smart contract audit"] },
   { id: "frontend", skills: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Ethers.js"] },
-  { id: "backend", skills: ["Node.js", "Go", "PostgreSQL", "Supabase", "Docker", "REST API"] },
+  { id: "backend", skills: ["Node.js", "Go", "PostgreSQL", "Supabase", "Docker", "Cloudflare Workers", "REST API"] },
   { id: "tools", skills: ["Git", "CI/CD", "AWS", "Web3.js", "Security research", "Vercel"] },
 ] as const;

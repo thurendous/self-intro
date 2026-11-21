@@ -1,3 +1,28 @@
+const EN_COUNTS: Record<number, string> = {
+  1: "One",
+  2: "Two",
+  3: "Three",
+  4: "Four",
+  5: "Five",
+  6: "Six",
+  7: "Seven",
+  8: "Eight",
+  9: "Nine",
+  10: "Ten",
+};
+const ZH_COUNTS: Record<number, string> = {
+  1: "一",
+  2: "两",
+  3: "三",
+  4: "四",
+  5: "五",
+  6: "六",
+  7: "七",
+  8: "八",
+  9: "九",
+  10: "十",
+};
+
 const en = {
   meta: {
     title: "Mark Wu | Blockchain engineer in Tokyo",
@@ -29,18 +54,25 @@ const en = {
   },
   products: {
     title: "Products",
-    intro: "Two products you can open now.",
+    intro: (count: number) => `${EN_COUNTS[count] ?? count} products you can open and use now.`,
     open: "Open",
     items: {
       tickspace: {
         name: "Tickspace",
-        summary: "A shared space for a family's values, long-term goals and daily to-dos.",
+        summary: "A space for a family's values, long-term goals and daily to-dos, shared in real time.",
         note: "For families who want to keep what matters in view next to what is due today.",
       },
       jpycWatcher: {
         name: "JPYC Watcher",
-        summary: "A dashboard for JPYC pool TVL, trading volume and estimated APY.",
+        summary:
+          "A dashboard for JPYC pools on Ethereum, Polygon, Avalanche and Kaia, with TVL, 24h volume and estimated APY synced hourly, plus history charts for each pool.",
         note: "APY figures are estimates, not guaranteed returns.",
+      },
+      recom: {
+        name: "RecoM",
+        summary:
+          "Simple shared bookkeeping: members join a Space with an invite code and record into one shared ledger.",
+        note: "JPY only. Interface in Chinese, English and Japanese.",
       },
     },
   },
@@ -138,18 +170,25 @@ const ja: Translation = {
   },
   products: {
     title: "プロダクト",
-    intro: "今すぐ開ける2つのプロダクトです。",
+    intro: (count: number) => `今すぐ開いて使える${count}つのプロダクトです。`,
     open: "開く",
     items: {
       tickspace: {
         name: "Tickspace",
-        summary: "家族の価値観、長期目標、毎日のToDoを共有するためのスペース。",
+        summary: "家族の価値観、長期目標、毎日のToDoをリアルタイムで共有するためのスペース。",
         note: "大切にしたいことと、今日やることを並べて見られるようにします。",
       },
       jpycWatcher: {
         name: "JPYC Watcher",
-        summary: "JPYCプールのTVL、取引量、推定APYを確認できるダッシュボード。",
+        summary:
+          "Ethereum、Polygon、Avalanche、KaiaのJPYCプールについて、TVL・24時間取引量・推定APYを1時間ごとに同期して表示し、プールごとの履歴チャートも見られるダッシュボード。",
         note: "APYは推定値であり、収益を保証するものではありません。",
+      },
+      recom: {
+        name: "RecoM",
+        summary:
+          "みんなで使えるシンプルな共有家計簿。招待コードでスペースに参加し、ひとつの共有台帳に一緒に記録できます。",
+        note: "日本円のみ。中国語・英語・日本語に対応しています。",
       },
     },
   },
@@ -243,18 +282,24 @@ const zh: Translation = {
   },
   products: {
     title: "产品",
-    intro: "两个现在就能打开的产品。",
+    intro: (count: number) => `${ZH_COUNTS[count] ?? count}个现在就能打开使用的产品。`,
     open: "打开",
     items: {
       tickspace: {
         name: "Tickspace",
-        summary: "与家人共享价值观、长期目标和每日待办的空间。",
+        summary: "与家人实时共享价值观、长期目标和每日待办的空间。",
         note: "把重要的事和今天要做的事放在一起看。",
       },
       jpycWatcher: {
         name: "JPYC Watcher",
-        summary: "查看 JPYC 资金池 TVL、交易量和预估 APY 的仪表盘。",
+        summary:
+          "查看以太坊、Polygon、Avalanche 和 Kaia 上 JPYC 资金池 TVL、24 小时交易量和预估 APY 的仪表盘，每小时同步，每个池都有历史图表。",
         note: "APY 为预估值，不代表保证收益。",
+      },
+      recom: {
+        name: "RecoM",
+        summary: "简洁好用的共享记账：成员凭邀请码加入空间，一起记到同一本账里。",
+        note: "仅支持日元。界面提供中文、英文和日文。",
       },
     },
   },

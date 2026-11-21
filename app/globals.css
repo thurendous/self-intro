@@ -10,6 +10,7 @@
   --rule: #c6cec8;
   --line-teal: #5fd8bd;
   --line-indigo: #aab6ff;
+  --line-coral: #ff9c7d;
   --signal: #f2b705;
   --focus: #1d4ed8;
   --serif:
@@ -249,7 +250,13 @@ main:focus {
   display: block;
   height: 0.6rem;
   margin-block: clamp(1.5rem, 4vw, 2.5rem);
-  background: linear-gradient(90deg, var(--ink) 0 55%, var(--line-teal) 55% 80%, var(--line-indigo) 80% 100%);
+  background: linear-gradient(
+    90deg,
+    var(--ink) 0 55%,
+    var(--line-teal) 55% 73%,
+    var(--line-indigo) 73% 87%,
+    var(--line-coral) 87% 100%
+  );
   border-radius: 0.3rem;
   transform-origin: left;
 }
@@ -333,7 +340,7 @@ h2 {
 
 .product-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1rem, 3vw, 2rem);
   margin-top: 2.5rem;
 }
@@ -356,6 +363,10 @@ h2 {
   border-color: var(--line-indigo);
 }
 
+.product-recom {
+  border-color: var(--line-coral);
+}
+
 .art {
   width: 7.5rem;
   height: auto;
@@ -368,6 +379,10 @@ h2 {
 
 .product-jpycWatcher .art {
   color: var(--line-indigo);
+}
+
+.product-recom .art {
+  color: var(--line-coral);
 }
 
 .product h3 {
@@ -406,7 +421,7 @@ h2 {
   overflow-wrap: anywhere;
 }
 
-@media (max-width: 52rem) {
+@media (max-width: 64rem) {
   .product-list {
     grid-template-columns: minmax(0, 1fr);
   }

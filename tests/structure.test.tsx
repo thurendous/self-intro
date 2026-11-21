@@ -44,6 +44,7 @@ describe("accessibility structure", () => {
     expect(html).not.toMatch(/hidden=""/);
     expect(html).toContain("Tickspace");
     expect(html).toContain("JPYC Watcher");
+    expect(html).toContain("RecoM");
   });
 
   it("marks decorative art as hidden from assistive tech", () => {
