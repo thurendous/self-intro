@@ -16,7 +16,10 @@ export default function Experience() {
             const copy = t.experience.items[item.id];
             return (
               <li key={item.id} className="row">
-                <h3>{copy.title}</h3>
+                <h3>
+                  {copy.title}
+                  {"ended" in item && <span className="status">{t.experience.ended}</span>}
+                </h3>
                 <div>
                   <p>{copy.desc}</p>
                   <p className="tags">{item.tags.join(", ")}</p>

@@ -1,9 +1,10 @@
 # Mark Wu: personal introduction and portfolio hub
 
-A static Next.js (App Router, `output: "export"`) site in English, Japanese and Chinese. It introduces Mark Wu, links the two current products, and keeps earlier project work as experience.
+A static Next.js (App Router, `output: "export"`) site in English, Japanese and Chinese. It introduces Mark Wu, links the three current products, and keeps earlier project work as experience.
 
 - Tickspace: https://tickspace.markwu.xyz
 - JPYC Watcher: https://jpyc-watcher.markwu.xyz
+- RecoM: https://recordmoney.markwu.xyz
 
 Public contact is GitHub (https://github.com/thurendous) and X (https://x.com/Markwu_crypto) only. There is no public email, mailto link, contact form or contact service, and tests enforce that.
 

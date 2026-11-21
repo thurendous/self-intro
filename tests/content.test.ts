@@ -8,6 +8,7 @@ const langs = Object.keys(translations) as (keyof typeof translations)[];
 
 function shape(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(shape);
+  if (typeof value === "function") return "function";
   if (value && typeof value === "object") {
     return Object.fromEntries(
       Object.entries(value)
@@ -57,6 +58,19 @@ describe("translations", () => {
     }
   });
 
+  it("label ended experience and list the AI tools group in every language", () => {
+    const labels = langs.map((l) => translations[l].experience.ended);
+    expect(labels).toEqual(["Service ended", "サービス終了", "服务已结束"]);
+    expect(translations.ja.skills.groups.ai).toBe("AIツール");
+    expect(skillGroups.at(-1)).toEqual({ id: "ai", skills: ["Cursor", "Claude Code", "Grok Bot"] });
+  });
+
+  it("explains 共有家計簿 in the ja RecoM summary without 家庭/家族", () => {
+    const s = translations.ja.products.items.recom.summary;
+    expect(s).toContain("共有家計簿（スペースのメンバーが同じ帳簿に記録できる家計簿）");
+    expect(s).not.toMatch(/家庭|家族/);
+  });
+
   it("are written in the right script", () => {
     expect(translations.ja.hero.intro).toMatch(/[぀-ヿ]/);
     expect(translations.zh.hero.intro).toMatch(/[一-鿿]/);
@@ -87,10 +101,11 @@ describe("translations", () => {
 });
 
 describe("product links", () => {
-  it("point at the two live products", () => {
+  it("point at the three live products", () => {
     expect(Object.fromEntries(products.map((p) => [p.id, p.url]))).toEqual({
       tickspace: "https://tickspace.markwu.xyz",
       jpycWatcher: "https://jpyc-watcher.markwu.xyz",
+      recom: "https://recordmoney.markwu.xyz",
     });
   });
 
@@ -98,6 +113,35 @@ describe("product links", () => {
     for (const lang of langs) {
       expect(translations[lang].products.items.tickspace.name).toBe("Tickspace");
       expect(translations[lang].products.items.jpycWatcher.name).toBe("JPYC Watcher");
+      expect(translations[lang].products.items.recom.name).toBe("RecoM");
+    }
+  });
+
+  it("keeps RecoM copy to verified features and avoids family wording for the Space", () => {
+    for (const lang of langs) {
+      const { name, summary, note } = translations[lang].products.items.recom;
+      const copy = [name, summary, note].join("\n");
+      expect(copy).not.toMatch(/家庭|家族|household|family/i);
+      expect(copy).not.toMatch(/固定|定期|recurring|fixed/i);
+    }
+  });
+
+  it("derives the products intro from the count", () => {
+    const { en, ja, zh } = translations;
+    expect(en.products.intro(3)).toBe("Three products you can open and use now.");
+    expect(en.products.intro(products.length)).toBe(en.products.intro(3));
+    expect(en.products.intro(2)).toContain("Two");
+    expect(en.products.intro(4)).toContain("Four");
+    expect(en.products.intro(42)).toContain("42");
+    expect(ja.products.intro(3)).toBe("今すぐ開いて使える3つのプロダクトです。");
+    expect(zh.products.intro(3)).toBe("三个现在就能打开使用的产品。");
+    expect(zh.products.intro(2)).toContain("两");
+    expect(zh.products.intro(42)).toContain("42");
+    for (const lang of langs) {
+      const intro = translations[lang].products.intro;
+      expect(typeof intro).toBe("function");
+      expect(intro(2)).not.toBe(intro(4));
+      expect(intro(3).trim()).not.toBe("");
     }
   });
 });

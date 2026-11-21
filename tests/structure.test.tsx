@@ -39,11 +39,19 @@ describe("accessibility structure", () => {
       expect(a).toMatch(/target="_blank"[^>]*rel="noopener noreferrer"|rel="noopener noreferrer"[^>]*target="_blank"/);
   });
 
+  it("marks SPARKN App as ended without linking the dead site", () => {
+    expect(html).toContain("Service ended");
+    expect(html).not.toContain("app.sparkn.io");
+    expect(html).toContain("https://github.com/jcam1/JPYCv2");
+    expect(html).toContain("https://github.com/codefox-inc/sparkn-contracts");
+  });
+
   it("keeps all content in the initial markup without animation gating", () => {
     expect(html).not.toMatch(/opacity:\s*0/);
     expect(html).not.toMatch(/hidden=""/);
     expect(html).toContain("Tickspace");
     expect(html).toContain("JPYC Watcher");
+    expect(html).toContain("RecoM");
   });
 
   it("marks decorative art as hidden from assistive tech", () => {
