@@ -25,7 +25,7 @@ export const experience = [
   },
   {
     id: "sparknApp",
-    link: "https://app.sparkn.io/",
+    ended: true,
     tags: ["Full-stack", "Solidity", "TypeScript", "Next.js", "Supabase", "Prisma"],
   },
   { id: "security", link: "https://github.com/thurendous", tags: ["Security", "Auditing", "EVM"] },
@@ -38,4 +38,5 @@ export const skillGroups = [
   { id: "frontend", skills: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Ethers.js"] },
   { id: "backend", skills: ["Node.js", "Go", "PostgreSQL", "Supabase", "Docker", "Cloudflare Workers", "REST API"] },
   { id: "tools", skills: ["Git", "CI/CD", "AWS", "Web3.js", "Security research", "Vercel"] },
+  { id: "ai", skills: ["Cursor", "Claude Code", "Grok Bot"] },
 ] as const;

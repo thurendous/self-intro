@@ -58,6 +58,19 @@ describe("translations", () => {
     }
   });
 
+  it("label ended experience and list the AI tools group in every language", () => {
+    const labels = langs.map((l) => translations[l].experience.ended);
+    expect(labels).toEqual(["Service ended", "サービス終了", "服务已结束"]);
+    expect(translations.ja.skills.groups.ai).toBe("AIツール");
+    expect(skillGroups.at(-1)).toEqual({ id: "ai", skills: ["Cursor", "Claude Code", "Grok Bot"] });
+  });
+
+  it("explains 共有家計簿 in the ja RecoM summary without 家庭/家族", () => {
+    const s = translations.ja.products.items.recom.summary;
+    expect(s).toContain("共有家計簿（スペースのメンバーが同じ帳簿に記録できる家計簿）");
+    expect(s).not.toMatch(/家庭|家族/);
+  });
+
   it("are written in the right script", () => {
     expect(translations.ja.hero.intro).toMatch(/[぀-ヿ]/);
     expect(translations.zh.hero.intro).toMatch(/[一-鿿]/);

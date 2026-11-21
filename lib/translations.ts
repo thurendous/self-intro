@@ -87,6 +87,7 @@ const en = {
     title: "Project experience",
     intro: "Earlier project work. The products above are what I am building now.",
     view: "View",
+    ended: "Service ended",
     items: {
       jpyc: {
         title: "JPYC v2",
@@ -125,6 +126,7 @@ const en = {
       frontend: "Front end",
       backend: "Back end and infrastructure",
       tools: "Tools",
+      ai: "AI tools",
     },
   },
   contact: {
@@ -187,7 +189,7 @@ const ja: Translation = {
       recom: {
         name: "RecoM",
         summary:
-          "みんなで使えるシンプルな共有家計簿。招待コードでスペースに参加し、ひとつの共有台帳に一緒に記録できます。",
+          "みんなで使えるシンプルな共有家計簿（スペースのメンバーが同じ帳簿に記録できる家計簿）。招待コードでスペースに参加できます。",
         note: "日本円のみ。中国語・英語・日本語に対応しています。",
       },
     },
@@ -203,6 +205,7 @@ const ja: Translation = {
     title: "プロジェクト実績",
     intro: "これまでのプロジェクトです。現在取り組んでいるのは上のプロダクトです。",
     view: "見る",
+    ended: "サービス終了",
     items: {
       jpyc: {
         title: "JPYC v2",
@@ -241,6 +244,7 @@ const ja: Translation = {
       frontend: "フロントエンド",
       backend: "バックエンドとインフラ",
       tools: "ツール",
+      ai: "AIツール",
     },
   },
   contact: {
@@ -314,6 +318,7 @@ const zh: Translation = {
     title: "项目经验",
     intro: "以往的项目。我目前正在做的是上面的产品。",
     view: "查看",
+    ended: "服务已结束",
     items: {
       jpyc: {
         title: "JPYC v2",
@@ -352,6 +357,7 @@ const zh: Translation = {
       frontend: "前端",
       backend: "后端与基础设施",
       tools: "工具",
+      ai: "AI 工具",
     },
   },
   contact: {
